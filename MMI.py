@@ -6,8 +6,6 @@ Refactored by: Matthew
 # Note we need to set the paramter values which we can alter for regression in the main analysis code
 # We can also change the names of functions etc
 
-import math
-
 def blade_moment_of_inertia(blade_weight_N, blade_length_m, model='rod'):
     """
     Estimates the MMI of a single turbine blade about the hub.
