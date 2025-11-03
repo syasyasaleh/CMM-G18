@@ -6,7 +6,6 @@ solving the ODE.
 
 import numpy as np
 from scipy.integrate import solve_ivp
-import matplotlib.pyplot as plt
 
 # Environmental Constants
 # These are fixed for all simulations
