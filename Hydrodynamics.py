@@ -8,7 +8,7 @@ Using values from (RAW)
 import numpy as np
 
 # 1. Blade Lengths
-BLADE_LENGTH_LOOKUP = np.array([0, 10, 20, 30, 40, 50, 60, 70])
+BLADE_LENGTH_LOOKUP = np.array([0, 10, 20, 30, 40, 50, 60, 70]) # THESE NEED TO BE CHANGED (50m-120m)
 
 # 2. Hydrostatic Stiffness
 KH_LOOKUP = np.array([
