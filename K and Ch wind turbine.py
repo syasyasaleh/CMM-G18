@@ -33,10 +33,10 @@ Height_tower=83 #m
 Diameter_nacelle=5 #m
 Height_narcelle=88
 
-Blade_length= np.arange(0, 80, 10) #m
+Blade_length= np.arange(60, 120, 10) #m
 
 #Mass #kg
-Mass_blade=300*Blade_length
+Mass_blade=1.17 * (Blade_length** 2.32) #kg
 Mass_nacelle=350000 
 Mass_tower=670000
 
@@ -95,3 +95,4 @@ g=9.81 #m/s2
 Restoring_moment = seawater_density*g*displaced_volume*metacentric_height
 
 print(f"restoring moment (K)={Restoring_moment}")
+
