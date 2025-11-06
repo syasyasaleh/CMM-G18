@@ -6,7 +6,7 @@ from scipy.optimize import curve_fit
 L = np.linspace(20, 150, 20)
 
 # "True" model: aerodynamic power minus drag/weight penalty
-# k1 controls scale, k2 controls penalty
+# k1 controls scale, k2 controls penalty for weight, drag and limits
 def realistic_power(L, k1, k2):
     return k1 * L**2 * np.exp(-k2 * L)
 
