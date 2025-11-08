@@ -96,3 +96,103 @@ Restoring_moment = seawater_density*g*displaced_volume*metacentric_height
 
 print(f"restoring moment (K)={Restoring_moment}")
 
+import math
+
+# 1. Platform Moment of Inertia
+def calculate_platform_inertia(mass_platform, radius_platform, height_platform=None):
+    """
+    Calculate the platform's rotational inertia about its central (pitch/roll) axis.
+    By default, assumes a solid cylinder rotating about its central axis.
+
+    I_platform = 0.5 * m * r^2
+
+    If height_platform is provided, you can use it to adjust the axis (optional).
+    """
+    I_platform = 0.5 * mass_platform * radius_platform**2
+    return I_platform
+
+
+
+# 2. Rotor Moment of Inertia
+def calculate_rotor_inertia(rotor_mass, rotor_radius):
+    """
+    Calculate the rotor's moment of inertia assuming a solid disk (blades + hub).
+
+    I_rotor = 0.5 * m * r^2
+    """
+    I_rotor = 0.5 * rotor_mass * rotor_radius**2
+    return I_rotor
+
+
+# 3. Added (Hydrodynamic) Inertia
+def calculate_added_inertia(added_mass, reference_radius):
+    """
+    Calculate the added (hydrodynamic) moment of inertia.
+
+    I_added = added_mass * r^2
+    """
+    I_added = added_mass * reference_radius**2
+    return I_added
+
+
+# 4. Total Moment of Inertia
+def total_inertia(I_platform, I_rotor, I_added):
+    """
+    Sum the components.
+    """
+    return I_platform + I_rotor + I_added
+
+
+# Example Usage
+if __name__ == "__main__":
+    # Example parameters (replace with real design data)
+    mass_platform = 8.0e6       # kg
+    radius_platform = 6.5       # m
+    mass_rotor = 1.1e5          # kg
+    radius_rotor = 63.0         # m
+    added_mass = 1.5e6          # kg (hydrodynamic added mass)
+    added_radius = 6.5          # m (approx same as platform radius)
+
+    # Calculate each component
+    I_platform = calculate_platform_inertia(mass_platform, radius_platform)
+    I_rotor = calculate_rotor_inertia(mass_rotor, radius_rotor)
+    I_added = calculate_added_inertia(added_mass, added_radius)
+
+    # Total
+    I_total = total_inertia(I_platform, I_rotor, I_added)
+
+    # Print results
+    print("\n=== Offshore Spar Wind Turbine Inertia Results ===")
+    print(f"Platform Inertia: {I_platform:,.2e} kg·m²")
+    print(f"Rotor Inertia:    {I_rotor:,.2e} kg·m²")
+    print(f"Added Inertia:    {I_added:,.2e} kg·m²")
+    print("----------------------------------------------")
+    print(f"Total Inertia:    {I_total:,.2e} kg·m²\n")
+
+import math 
+import pandas as pd
+
+Restoring_hydrostatic_moment=np.array([2.73897174e+09,2.73539926e+09,2.73182780e+09,2.72825738e+09,2.72468799e+09,2.72111962e+09,2.71755228e+09,2.71398598e+09])
+hydrodynamic_damping_list=[]
+
+delta=np.arange(0,1,0.2)
+
+for d in np.arange(0,1,0.2):
+    Ch_per_Kh=[] #damping list for every restoring hydrostatic moment
+    for Kh in Restoring_hydrostatic_moment:
+        hydrodynamic_damping=2*d*math.sqrt(Kh* I_total) 
+        Ch_per_Kh.append(hydrodynamic_damping) 
+    hydrodynamic_damping_list.append(Ch_per_Kh)
+
+hydrodynamic_damping_array=np.array(hydrodynamic_damping_list)
+
+# Create column names dynamically
+columns = [f"Ch{i+1}" for i in range(len(Restoring_hydrostatic_moment))]
+
+# Combine damping ratio + Ch values into DataFrame
+df = pd.DataFrame(hydrodynamic_damping_array, columns=columns)
+df.insert(0, "Damping Ratio", delta)
+
+# Print nicely
+print(df.to_markdown(index=False, floatfmt=".2e"))
+
