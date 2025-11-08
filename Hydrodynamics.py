@@ -20,15 +20,16 @@ KH_LOOKUP = np.array([
     2.68710299e+09, # K_h for 90m
     2.67277562e+09, # K_h for 100m
     2.65644390e+09 # K_h for 110m
+    2.63594952e+09 # K_h for 120m
 ])
 
 # 3. Mooring Stiffness
 K_M_Factor = 0.20 # Mooring stiffness is 20% of hydrostatic 
 
 # 4. Damping Ratio
-ZETA = 0.20
+ZETA = 0.20 # Assuming a reasonable damping ratio 
 
-# Functions that are easy to import
+# Functions that are easy to import into our main code for stability
 
 def calculate_stiffness(blade_length):
     """
@@ -38,7 +39,8 @@ def calculate_stiffness(blade_length):
     
     # 1. Use np.interp to find the K_h for the exact blade_length
     K_h = np.interp(blade_length, BLADE_LENGTH_LOOKUP, KH_LOOKUP)
-    # 2. Calculate k_m bassedon k_h
+    
+    # 2. Calculate k_m based on k_h
     K_m = K_h * K_M_Factor
     
     # 3. Add the constant mooring stiffness
