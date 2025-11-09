@@ -1,6 +1,6 @@
 """
 Hydrodynamics Module
-Using values from (RAW)
+Using values from (RAW) K and Ch wind  turbine.py
 Re-writing the code so its easier to integrate in main code
 """
 
