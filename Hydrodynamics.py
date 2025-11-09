@@ -1,7 +1,5 @@
 """
 Hydrodynamics Module
-Original: Syasya
-Refactored by: Matthew
 Using values from (RAW)
 Re-writing the code so its easier to integrate in main code
 """
