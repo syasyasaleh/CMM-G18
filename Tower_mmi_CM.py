@@ -13,7 +13,7 @@ so we can see how realistic this value is conceptually.
 import numpy as np
 
 # Table 2-1 data (nodes). Elevations [m], mass density TMassDen [kg/m], TwFAIner [kg·m]
-# (values copied from the OC3 table in the conversation)
+# (values copied from the OC3 table 2-1. Distributed Tower Properties)
 z = np.array([10.00, 17.76, 25.52, 33.28, 41.04, 48.80, 56.56, 64.32, 72.08, 79.84, 87.60])
 tmassden = np.array([4667.00, 4345.28, 4034.76, 3735.44, 3447.32, 3170.40,
                      2904.69, 2650.18, 2406.88, 2174.77, 1953.87])
@@ -55,3 +55,4 @@ print(f"I_CM (about tower centroid) = {I_CM:0.6e} kg·m^2")
 print(f"Mass from segments = {mass_from_segments} kg (reported total = {m_total} kg)")
 print(f"I_about_base (z=10.0 m) = {I_about_base:0.6e} kg·m^2")
 print(f"I_about_top  (z=87.6 m) = {I_about_top:0.6e} kg·m^2")
+
