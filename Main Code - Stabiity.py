@@ -1,6 +1,6 @@
 """Main Stability Analysis
 In this code we will:
-To determine the maximum blade length (L) for a floating spar buoy
+Determine the maximum blade length (L) for a floating spar buoy
 turbine that keeps the maximum pitch angle under a 10-degree limit.
 
 We will do this by:
