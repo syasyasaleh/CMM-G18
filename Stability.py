@@ -12,7 +12,6 @@ from scipy.integrate import solve_ivp
 M_WAVE_AMP = 2e5 # N·m (From Syasya's notebook) constant wave moment amplitude
 OMEGA_WAVE = 0.5 # rad/s (From Syasya's notebook) constant wave freqeuncy
 
-# =====================================
 
 # SECTION 2: The ODE Function
 def _pitch_ode_model(t, y, I_total, C_h, K_total, t_wind, M_wind_series):
@@ -68,7 +67,6 @@ def _pitch_ode_model(t, y, I_total, C_h, K_total, t_wind, M_wind_series):
     
     return [theta_dot, theta_ddot]
 
-# =====================================
 
 # SECTION 3: Easy to Recall Function
 
@@ -103,7 +101,6 @@ def run_stability_simulation(I_total, C_h, K_total, t_wind, M_wind_series, t_spa
     
     return t_eval, sol
 
-# =====================================
 
 # SECTION 4: TEST BLOCK
 if __name__ == "__main__":
