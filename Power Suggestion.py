@@ -36,7 +36,7 @@ MAX_WIND_SPEED = 25 # Max speed to check (matches cut-out)
 """Justification of the parameter values:
 We are using citable parameters for a real site.
 We have selected the data at 91m altitude, which is the
-closest available data point to our turbine's 87.6m hub height.
+closest available data point to our turbine's 87.6m hub height."""
 
 def get_wind_distribution(A, k, max_v=MAX_WIND_SPEED):
     """
