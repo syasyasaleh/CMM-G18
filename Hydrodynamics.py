@@ -1,6 +1,6 @@
 """
 Hydrodynamics Module
-Using values from (RAW) K and Ch wind  turbine.py
+Using values from (RAW)
 Re-writing the code so its easier to integrate in main code
 """
 
@@ -22,10 +22,20 @@ KH_LOOKUP = np.array([
 ])
 
 # 3. Mooring Stiffness
-K_M_Factor = 0.20 # Mooring stiffness is 20% of hydrostatic 
+K_M_Factor = 0.20 # Mooring stiffness is 20% of hydrostatic
+"""Simplification justification:
+A full mooring system analysis is complex, and for our 1-DOF model,
+we are making a justifiable assumption that the mooring system's
+restoring stiffness (K_m) is 20% of the platform's hydrostatic
+stiffness (K_h).""" 
 
 # 4. Damping Ratio
 ZETA = 0.20 # Assuming a reasonable damping ratio 
+"""Simplification justification:
+Total hydrodynamic damping is a combination of wave radiation,
+viscous drag, and other effects. We are simplifying this
+complex system by assuming a standard damping ratio (zeta) of 20%,
+which is a common approximation for similar systems."""
 
 # Functions that are easy to import into our main code for stability
 
