@@ -200,6 +200,8 @@ def find_pitch_for_length(L, t_wind, v_wind):
 
 # Section 5: The main analysis
 if __name__ == "__main__": # Starting our code from here
+    
+    print("Stability analysis has began")
 
     # 1. Create the single Wind Gust Profile for all simulations
     t_wind, v_wind = create_wind_gust_profile(T_SPAN, v_mean=V_WIND_MEAN)
@@ -261,3 +263,4 @@ if __name__ == "__main__": # Starting our code from here
     
     plt.savefig("stability_analysis_curve.png")
     print("-" * 45)
+    print("Saved final plot to 'stability_analysis_curve.png'")
