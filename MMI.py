@@ -30,7 +30,7 @@ PITCH_AXIS_Z = -45.5 # [m] (Pitch axis is at Center of Buoyancy, CB)
 Using Syasya's calculation:
 Distance from bottom of platform to SWL
 - distance from bottom to Centre Buoyancy
-91m - 45.5m = 45.5m
+90m - 45.5m = 45.5m
 """
 
 # Part 1: Platform (Spar Buoy) Table 3-1 of the Floating System
@@ -51,11 +51,23 @@ NACELLE_HUB_CM_Z = 87.6 # [m] (Z-coord of the combined hub/nacelle CM) T.4-1 W.T
 
 # (Inertia of Rotor + Nacelle about their combined CM)
 NACELLE_HUB_MMI_CM = 115926 + 2607890 # [kg·m^2] T.4-1 W.T
+"""Simplification justification:
+These values are sourced from Table 4-1 W.T.
+- 115926 kg·m^2 = Hub Inertia about Low-Speed Shaft (Roll)
+- 2607890 kg·m^2 = Nacelle Inertia about Yaw Axis (Yaw)
+
+Our 1-DOF model simulates PITCH motion.
+
+This is a physical inconsistency, but the correct PITCH MMI
+values (e.g., from other NREL reports) are not provided.
+
+Therefore, we are using these citable values as a
+reasonable approximation for the PITCH MMI to proceed
+with the model."""
 
 # Part 4: Hydrodynamic Added Mass
 I_ADDED_MASS = 3.8e10 # [kg·m^2] Fig.4-4 F.S
-"""
-JUSTIFIABLE SIMPLIFICATION
+"""Simplification justification:
 This value (3.8e10) is sourced from Fig 4-4 of the F.S. report,
 where it is referenced to the Still Water Level (SWL, z=0.0).
 For this 1-DOF model, we are assuming this value is a
@@ -64,8 +76,7 @@ system pitch axis (CB, z=-45.5).
 
 A full Parallel Axis Theorem transfer was not performed
 because the required hydrodynamic mass term 
-was not available in our specification document.
-"""
+was not available in our specification document."""
 
 
 
