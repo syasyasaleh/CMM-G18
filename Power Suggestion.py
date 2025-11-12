@@ -114,7 +114,7 @@ def create_scaled_power_curve_fn(L, base_power_fn):
         base_power_w = base_power_fn(v) * 1000
         
         # 3. The model using a scalling assumption
-        """This is our scalling asumption which is that power ir proportional to the swept area A=pi*L^2,
+        """This is our scalling asumption which is that power is proportional to the swept area A=pi*L^2,
         so the new power is scaled by the ratio of the areas (L/L_base)^2"""
         scaled_power_w = base_power_w * (L / BASE_BLADE_LENGTH)**2
         
@@ -173,8 +173,8 @@ if __name__ == "__main__":
     
     # 2. Define the design cases to test
     blade_lengths_to_test = np.arange(60, 161, 5) # Test up to 160m so we can see a larger scale
-    """We will include up to a balde length of 160m to highlight that this model assumes perfect stability,
-    so we need to compare against our stbailty code results i.e. max picth 10 deg @ L=83m."""
+    """We will include up to a blade length of 160m to highlight that this model assumes perfect stability,
+    so we need to compare against our stabilty code results i.e. max picth 10 deg @ L=83m."""
     
     print(f"Running {len(blade_lengths_to_test)} design cases for 60m to 160m")
     
