@@ -26,12 +26,7 @@ def _get_realistic_blade_mass_kg(blade_length_m):
 # References for the data values used are in the report and taken from other members codes
 # All coordinates are relative to Still Water Level (SWL)
 PITCH_AXIS_Z = -45.5 # [m] (Pitch axis is at Center of Buoyancy, CB) 
-"""
-Using Syasya's calculation:
-Distance from bottom of platform to SWL
-- distance from bottom to Centre Buoyancy
-90m - 45.5m = 45.5m
-"""
+# Using Syasya's calculation
 
 # Part 1: Platform (Spar Buoy) Table 3-1 of the Floating System
 PLATFORM_MASS = 7466330 # [kg] T.3-1 F.S
