@@ -201,10 +201,14 @@ def find_pitch_for_length(L, t_wind, v_wind):
 # Section 5: The main analysis
 if __name__ == "__main__": # Starting our code from here
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
 
 >>>>>>> 726bbce9017c43a7fb314fec033e048bdee6138a
+=======
+
+>>>>>>> Stashed changes
     # 1. Create the single Wind Gust Profile for all simulations
     t_wind, v_wind = create_wind_gust_profile(T_SPAN, v_mean=V_WIND_MEAN)
 
