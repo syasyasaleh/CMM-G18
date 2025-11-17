@@ -1,3 +1,4 @@
+
 """Power analysis of the wind turbine:
 we will determine the Annual Energy Production (AEP) for the spar buoy
 turbine across a range of blade lengths of 60m to 160m by calculating the AEP
@@ -26,12 +27,17 @@ import matplotlib.pyplot as plt
 deployment in the North Sea by 2030:
 long-term measurement campaign. EPL, 
 2016-2022"""
-WEIBULL_A = 10.945 # Scale parameter [m/s]
+WEIBULL_A = 10.566 # Scale parameter [m/s]
 """This parameter either expands or contarcts the distibutio along the wind speed axis."""
-WEIBULL_K = 2.052 # Shape parameter [-]
+WEIBULL_K = 2.113 # Shape parameter [-]
 """If k is less than 1 this indicated a distrubtion with a higher fequency of low wind speeds
 IF k is > 1 this indicates a more consistent wind speed around the median."""
 MAX_WIND_SPEED = 25 # Max speed to check (matches cut-out)
+"""Justification of the parameter values:
+We are using citable parameters for a real site.
+We have selected the data at 91m altitude, which is the
+closest available data point to our turbine's 87.6m hub height."""
+
 
 def get_wind_distribution(A, k, max_v=MAX_WIND_SPEED):
     """
@@ -296,4 +302,4 @@ if __name__ == "__main__":
     ax_reg.set_xlim(left=0)
     fig_reg.suptitle('Justification of The Regression Model Fit', fontsize=16)
     ax_reg.legend(loc='best'); plt.tight_layout()
-    plt.savefig("power_regression_justification.png")
+    plt.savefig("regression_justifcation.png")
