@@ -22,10 +22,7 @@ The flow of the code:
 2.  It calls the root finder (`find_root_by_false_position`).
 3.  The root finder repeatedly calls the main simulation
     (`find_pitch_for_length`), which in turn calls all imported modules.
-4.  The results are saved, printed to a table, and plotted.
-
-
-"""
+4.  The results are saved, printed to a table, and plotted."""
 
 
 # Library imports
