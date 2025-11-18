@@ -1,1 +1,18 @@
-dd
+This file explains how our code files work, what they compute, and how they integrate together.
+
+File Structure
+- Main Code - Stability.py
+- Hydrodynamics.py:
+- MMI.py:
+- Tower_mmi_CM.py:
+- Power:
+
+How to run the code
+
+
+Implementation of Numerical Methods
+- Root Finding
+
+- ODE Solver
+
+- Regression / Interpolation
