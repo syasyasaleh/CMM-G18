@@ -1,16 +1,25 @@
 This file explains how our code files work, what they compute, and how they integrate together.
 
-File Structure
-- Main Code - Stability.py
-- Hydrodynamics.py:
-- MMI.py:
-- Tower_mmi_CM.py:
+# File Structure
+- Main Code - Stability.py: This main code will import and take values from the other 4 mini modules listed below.
+                            This code runs the simulation loops, finds teh roots, and solves the ODE, plotting all final results regarding stability.
+    - Hydrodynamics.py:
+    - MMI.py:
+    - Tower_mmi_CM.py:
+    - Stability.py: 
+
 - Power:
 
-How to run the code
+# How to run the code
+You will only need to run two files: Main - Code.py and Power.py. 
+1. Ensure that all the files listed above in File Structure are downloaded inside the same dictionary as they relate to each other.
+   You will also need the following libraries installed: 'numpy', 'scipy', 'matplotlib'.
+
+2. Open 'Main Code - Stability.py' and run the file.
+   
 
 
-Implementation of Numerical Methods
+# Implementation of Numerical Methods
 - Root Finding
 
 - ODE Solver
