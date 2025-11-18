@@ -2,21 +2,32 @@ This file explains how our code files work, what they compute, and how they inte
 
 # File Structure
 - Main Code - Stability.py: This main code will import and take values from the other 4 mini modules listed below.
-    This code runs the simulation loops, finds teh roots, and solves the ODE, plotting all final results regarding stability.
-    - Hydrodynamics.py:
-    - MMI.py:
-    - Tower_mmi_CM.py:
-    - Stability.py: 
+    This code runs the simulation loops, finds the roots, and solves the ODE, plotting all final results regarding stability.
+    The following 4 mini-modules are not required to be run seperately, the 'Main Code - Stability' runs the functions from them.
+    - Hydrodynamics.py: this covers the hydrodyanmics of the system. It covers hydrostatic stiffness interpolation and damping calculations.
+    - MMI.py: This solve the entire moment of inertia of the system.
+    - Tower_mmi_CM.py: This seperate MMI code calculates using numerical integration i.e. Trapezoidal Rule, the towers centre of mass and inertia using the raw tower denisty data per blade length from our reference.
+    - Stability.py: This contains the ODE definition of our system for the main stability code to call to. 
 
 - Power:
 
+
+
 # How to run the code
-You will only need to run two files: Main - Code.py and Power.py. 
+You will only need to run two files: 'Main - Code.py' and 'Power.py'.
+
+## Stability Code
 1. Ensure that all the files listed above in File Structure are downloaded inside the same dictionary as they relate to each other.
    You will also need the following libraries installed: 'numpy', 'scipy', 'matplotlib'.
 
 2. Open 'Main Code - Stability.py' and run the file.
+
+3. The console will output the iteration logs (e.g. "Root Finder Guess: L=...") and it's correspondng ODE solution.
+
+4. This will also output Figure 1 - the plot of Stability vs Blade Length which highlghts the max blade length to keep the pitch motion within 10 degrees.
    
+## Power Code
+1. ..................
 
 
 # Implementation of Numerical Methods
@@ -31,7 +42,7 @@ You will only need to run two files: Main - Code.py and Power.py.
   The ODE itself is defined inside 'Stability.py'.
 
 - Regression / Interpolation
-  - Interpolation: Power....
+  - Interpolation: Power................
 
 
 
