@@ -2,7 +2,7 @@ This file explains how our code files work, what they compute, and how they inte
 
 # File Structure
 - Main Code - Stability.py: This main code will import and take values from the other 4 mini modules listed below.
-                            This code runs the simulation loops, finds teh roots, and solves the ODE, plotting all final results regarding stability.
+    This code runs the simulation loops, finds teh roots, and solves the ODE, plotting all final results regarding stability.
     - Hydrodynamics.py:
     - MMI.py:
     - Tower_mmi_CM.py:
@@ -21,7 +21,19 @@ You will only need to run two files: Main - Code.py and Power.py.
 
 # Implementation of Numerical Methods
 - Root Finding
+  This section is foudnign within 'Main COde - Stabilty.py' (Lines 101-163).
+  It uses 'find_root_by_false_position'.
+  This is a slightly modified version of the Regula Falsi method to solve $f(L) = \theta_{max} - 10^\circ = 0$.
 
 - ODE Solver
+  This sction is found within 'Main Code - Stability.py' (inside 'find_pitch_for_length' function).
+  It uses 'scipy.itegrate.solve_ivp' with 'method='RK45''.
+  The ODE itself is defined inside 'Stability.py'.
 
 - Regression / Interpolation
+  - Interpolation: Power....
+
+
+
+  - Interpolation 2 (minor): We use a minor interpolation in 'Hydrodynamics.py' (Lines 42-57)
+    using the one dimensional liear interpolation 'numpy.interp' to determine the Hydrostatic stiffness (k_h) for varying blade lengths.
