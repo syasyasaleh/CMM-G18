@@ -2,9 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
-# ----------------------------------------------------------
-# STEP 1 — Synthetic experimental data
-# ----------------------------------------------------------
+# Synthetic experimental data
 L = np.linspace(20, 150, 20)
 
 def realistic_power(L, k1, k2):
@@ -16,28 +14,20 @@ P_true = realistic_power(L, true_k1, true_k2)
 rng = np.random.default_rng(42)
 P_measured = P_true * (1 + 0.05 * rng.standard_normal(len(L)))
 
-# ----------------------------------------------------------
-# STEP 2 — Fit regression
-# ----------------------------------------------------------
+# Fit regression
 popt, _ = curve_fit(realistic_power, L, P_measured, p0=[0.01, 0.01])
 k1_fit, k2_fit = popt
 P_fit = realistic_power(L, k1_fit, k2_fit)
 
-# ----------------------------------------------------------
-# STEP 3 — Optimal blade length (mathematical optimum)
-# ----------------------------------------------------------
+# Optimal blade length (mathematical optimum)
 L_opt = 2 / k2_fit
 P_opt = realistic_power(L_opt, k1_fit, k2_fit)
 
-# ----------------------------------------------------------
-# STEP 4 — YOUR allowed blade length
-# ----------------------------------------------------------
-max_L_allowed = 90.0   # <— replace with your value
+# Allowed blade length
+max_L_allowed = 83.47   
 P_allowed = realistic_power(max_L_allowed, k1_fit, k2_fit)
 
-# ----------------------------------------------------------
-# STEP 5 — Plot with horizontal P_allowed line
-# ----------------------------------------------------------
+# Plot with horizontal 
 plt.figure(figsize=(8,5))
 
 plt.scatter(L, P_measured, color='r', label='Synthetic measured data')
@@ -68,9 +58,7 @@ plt.grid(True)
 plt.tight_layout()
 plt.show()
 
-# ----------------------------------------------------------
 # STEP 6 — Print results
-# ----------------------------------------------------------
 print(f"Fitted model: P(L) = {k1_fit:.4f} * L^2 * exp(-{k2_fit:.4f} * L)")
 print(f"Optimal blade length (max power): L_opt = {L_opt:.2f} m,   P_opt = {P_opt:.4f}")
 print(f"Your allowed blade length:         L_allowed = {max_L_allowed:.2f} m")
