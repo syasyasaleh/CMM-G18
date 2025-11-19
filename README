@@ -27,8 +27,9 @@ You will only need to run two files: 'Main - Code.py' and 'Power.py'.
 4. This will also output Figure 1 - the plot of Stability vs Blade Length which highlights the max blade length to keep the pitch motion within 10 degrees.
    
 ## Power Code
-1. ..................
+1. Run the 'main.py' file first to display all plots and print to console the AEP table for multiple blade lengths.
 
+2. This will display the plots: Figure 2, Figure 5 and Figure 6  and print the AEP table for multiple blade lengths.
 
 # Implementation of Numerical Methods
 - Root Finding
@@ -42,9 +43,9 @@ You will only need to run two files: 'Main - Code.py' and 'Power.py'.
   The ODE itself is defined inside 'Stability.py'.
 
 - Regression / Interpolation
-  - Interpolation: Power................
-
-
+  - Interpolation: 
+    This section is found in within 'Main_Power_Analysis.py) file. Lines 40-95
+    It uses 'tck = interpolate.splrep(...)'.
 
   - Interpolation 2 (minor): We use a minor interpolation in 'Hydrodynamics.py' (Lines 42-57)
     using the one dimensional linear interpolation 'numpy.interp' to determine the Hydrostatic stiffness (k_h) for varying blade lengths.
