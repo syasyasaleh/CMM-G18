@@ -12,7 +12,7 @@ WEIBULL_A = 10.566
 WEIBULL_K = 2.113
 MAX_WIND_SPEED = 25
 CUT_OUT_SPEED = 25.0
-CUT_IN_SPEED = 1.5            # When frictional forces are overcome so blade starts spinning
+CUT_IN_SPEED = 1.5           # When frictional forces are overcome so blade starts spinning
 
 def get_wind_distribution(A, k, max_v=MAX_WIND_SPEED):
     hours_in_year = 365 * 24
@@ -50,10 +50,12 @@ p_data_kw_base_nrel = BASE_POWER_CURVE_DATA[:, 1]
 
 # --- SPLINE Interpolation Function ---
 def get_nrel_base_power_spline_fn():
+
     """
     Returns a Spline interpolation function for the base NREL 5MW data.
     Uses splrep with s=0 (no smoothing, passes through all points).
     """
+
     # 1. Generate the B-spline representation (tck)
     # s=0 ensures it passes through every data point exactly
     tck = interpolate.splrep(v_data_base_nrel, p_data_kw_base_nrel, s=0)
@@ -200,8 +202,8 @@ if __name__ == "__main__":
     plt.figure(figsize=(12, 8))
     
     # Pitch angles to request
-    pitch_angles = [0, 5, 7.5,  10,]
-    colors = ['y', 'g', 'r', 'b' ] # Blue, Green, Red
+    pitch_angles = [0, 5, 7.5, 10,]
+    colors = ['c', 'g', 'r', 'm'] # Blue, Green, Red
     
     for i, beta in enumerate(pitch_angles):
         # Create the power curve function for this specific pitch
@@ -250,7 +252,7 @@ plt.figure(figsize=(10, 7))
 
 pitch_range = np.linspace(0, 20, 200)   # pitch angles to evaluate (degrees)
 v_test = 12                           # wind speed of interest (rated wind speed)
-L = 83.75                    # same blade length as previous plots
+L = 72.8                    # same blade length as previous plots
 
 power_values = []
 
