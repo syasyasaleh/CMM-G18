@@ -234,6 +234,13 @@ if __name__ == "__main__":
     # ------------------------------------
     # AEP CALCULATION LOOP (Verification)
     # ------------------------------------
+
+    power_fn_L = make_scaled_power_curve_from_spline(72.8, base_nrel_spline_power_kw, beta_deg=0.0)
+    aep = float(calculate_aep(power_fn_L, wind_dist))
+
+    print("\nAnnual Energy Production = ", aep, "MWh")
+    print("\nAnnual Profit = £", aep*0.2635*1000)
+
     blade_lengths_to_test = np.arange(60, 161, 10) # Reduced step for brevity
     print("\nCalculated AEP using Spline Model (Pitch=0°):")
     print("Blade Length (m) | AEP (MWh/yr)")
@@ -244,6 +251,8 @@ if __name__ == "__main__":
         aep = float(calculate_aep(power_fn_L, wind_dist))
         print(f" {L:<15.2f} | {aep:,.0f}")
 
+
+
 # ------------------------------------
 # PLOT 3 — POWER GENERATION vs Cp
 # ------------------------------------
@@ -253,6 +262,7 @@ plt.figure(figsize=(10, 7))
 pitch_range = np.linspace(0, 20, 200)   # pitch angles to evaluate (degrees)
 v_test = 12                           # wind speed of interest (rated wind speed)
 L = 72.8                    # same blade length as previous plots
+
 
 power_values = []
 
