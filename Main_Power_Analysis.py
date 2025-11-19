@@ -1,3 +1,4 @@
+
 import numpy as np
 import matplotlib.pyplot as plt
 import math
@@ -9,8 +10,8 @@ from scipy import interpolate # Importing the full interpolate module for splrep
 
 WEIBULL_A = 10.566
 WEIBULL_K = 2.113
-MAX_WIND_SPEED = 25
-CUT_OUT_SPEED = 25.0
+MAX_WIND_SPEED = 30
+CUT_OUT_SPEED = 30.0
 CUT_IN_SPEED = 1.5           # When frictional forces are overcome so blade starts spinning
 
 def get_wind_distribution(A, k, max_v=MAX_WIND_SPEED):
@@ -170,14 +171,14 @@ if __name__ == "__main__":
     wind_dist, v_wind = get_wind_distribution(WEIBULL_A, WEIBULL_K)
     
     # Setup for plots
-    representative_L = 80
+    representative_L = 72.8
     v_plot_detailed = np.linspace(0, 30, 500) # Higher res for smooth spline visualization
 
     # ------------------------------------
     # PLOT 1: SPLINE FIT JUSTIFICATION
     # ------------------------------------
     # Visualizing how the spline fits the raw data
-    v_smooth_fit = np.linspace(0, 25, 500)
+    v_smooth_fit = np.linspace(0, 30, 500)
     p_smooth_fit = base_nrel_spline_power_kw(v_smooth_fit) 
 
     plt.figure(figsize=(10, 6))
@@ -190,6 +191,7 @@ if __name__ == "__main__":
     plt.xlabel("Wind Speed (m/s)", fontsize=14)
     plt.ylabel("Power Generation (kW)", fontsize=14)
     plt.grid(True, linestyle='--')
+    plt.xlim(0, 25)
     plt.legend()
     plt.tight_layout()
     plt.show()
@@ -220,11 +222,11 @@ if __name__ == "__main__":
     # Add Generator Limit line
     plt.axhline(GENERATOR_LIMIT_W / 1e6, color='gray', linestyle=':', label="Generator Limit (5 MW)")
 
-    plt.title(f"Power Curve vs Wind Speed by Pitch Angle (L={representative_L}m)", fontsize=16)
+    plt.title(f"Power Curve vs Wind Speed by Pitch Angle (L = 72.8 m)", fontsize=16)
     plt.xlabel("Wind Speed (m/s)", fontsize=14)
     plt.ylabel("Electrical Power Generation (MW)", fontsize=14)
     plt.grid(True, linestyle='--')
-    plt.xlim(0, 25)
+    plt.xlim(0, 30)
     plt.ylim(bottom=0)
     plt.legend(fontsize=12)
     plt.tight_layout()
