@@ -262,3 +262,22 @@ if __name__ == "__main__": # Starting our code from here
     
     plt.savefig("stability_analysis_curve.png")
     print("-" * 45)
+
+# Temporary: Find Blade Length for 7.5 Degrees specifically (Report - Conclusion)
+from scipy.optimize import brentq  # A reliable root-finding method library
+
+print("Check for pitch = 7.5 Degrees")
+
+# 1. Define a temporary objective function that equals 0 when pitch is 7.5
+def target_7_5_deg(L):
+    # We reuse your existing physics simulation!
+    # We want: Pitch - 7.5 = 0
+    return find_pitch_for_length(L, t_wind, v_wind) - 7.5
+
+# 2. Use Scipy's 'brentq' solver (it's faster/easier than writing a loop manually)
+# We guess the length is somewhere between 60m (Pass) and 120m (Fail)
+try:
+    L_solution = brentq(target_7_5_deg, 60, 120) 
+    print(f"SUCCESS: The blade length for exactly 7.5 deg pitch is: {L_solution:.4f} m")
+except ValueError:
+    print("FAIL: Could not find a solution in the [60, 120] range.")
