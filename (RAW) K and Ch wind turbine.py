@@ -1,63 +1,73 @@
 import numpy as np
-# Geometry
-radius=7
+# Geometry and platform mass distribution
+radius=7 #platfrom radius (m)
 A=np.pi*radius**2
-mass = 10000000 #kg
+mass = 10000000 #platform mass (kg)
 # Depth limits (z = 0 at waterline, negative downward)
 z_top = 0
-z_bottom = -91
+z_bottom = -91 # Total submerged height of spar platform (m)
+
 # Define zones (m)
 zones = [
     {"z1": 0, "z2": -61, "rho": 300},    # Air-filled section
     {"z1": -61, "z2": -71, "rho": 1025}, # Water ballast
     {"z1": -71, "z2": -91, "rho": 5000}  # Solid ballast
 ]
-Mz_total=0
-M_total=0
+Mz_total=0 # Moment contribution for CG calculation
+M_total=0 # Total mass of submerged sections
 
+# Compute CG for each vertical zone 
 for zone in zones:
     z1, z2, rho = zone["z1"], zone["z2"], zone["rho"]
     dz = abs(z2 - z1)
 
-    M_zone = rho * A * dz     #mass of that zone(ballast,water,air)
-    z_cg_zone = 0.5 * (z1 + z2)
+    M_zone = rho * A * dz     # Mass of the zone
+    z_cg_zone = 0.5 * (z1 + z2) # CG of the zone
     
     M_total += M_zone
     Mz_total += M_zone * z_cg_zone
 
+# Total submerged CG
 z_total = Mz_total / M_total
 
 print(f"Total mass={M_total} kg")
 print(f"Total centroid={z_total} m")
+
+# TOPSIDE (TOWER + NACELLE + BLADES) MASS & CG
 Height_tower=83 #m
 Diameter_nacelle=5 #m
-Height_narcelle=88
+Height_narcelle=88 # Centre of narcelle above waterline
 
 Blade_length= np.arange(60, 120, 10) #m
 
-#Mass #kg
 Mass_blade=1.17 * (Blade_length** 2.32) #kg
-Mass_nacelle=350000 
-Mass_tower=670000
+Mass_nacelle=350000  #kg
+Mass_tower=670000 #kg
 
 y_cg_list = []
 
+# Compute CG above water for each blade length
 for blade_length in Blade_length:
-    
+
+    # Individual component CG locations (m)
     y_cg_blade = 0.4*blade_length+Height_tower
     y_cg_tower = Height_tower/2
     y_cg_nacelle = Height_tower+(Diameter_nacelle/2)
-    
+
+    # Total moment and mass of topside components
     My_total=Mass_blade*y_cg_blade + Mass_nacelle*y_cg_nacelle + Mass_tower*Height_tower
     Mm_total=Mass_blade+Mass_nacelle+Mass_tower
 
-    y_total = My_total/Mm_total
+    y_total = My_total/Mm_total # Overall CG of the topside
 
     y_cg_list.append(y_total)
 
 print (f"total mass above water={Mm_total}kg")
 print (f"y cg above water surface={y_total}m")
 
+
+# Overall CG position (Above and Below Waterline)
+# Combine CGs, referenced from bottom of platform
 M_final=M_total+Mm_total
 Mcg_final= M_total*(abs(z_bottom-z_total))+ (Mm_total*(y_total+abs(z_bottom)))
 
@@ -66,28 +76,30 @@ cg_final= Mcg_final/M_final
 print(f"mass final={M_final}kg")
 print (f"cg final from bottom platform={cg_final}")
 
-#centre of buoyancy 
-#only account for the submerged part of the wind turbine (the spar buoy platform)
+# Centre of buoyancy 
+# Only account for the submerged part of the wind turbine (the spar buoy platform)
 
 from scipy.integrate import quad
 
 def volume_cylinder(h):
     return np.pi*(radius**2)*h
 
+# Volume integral of the submerged cylinder
+# Integrate from top (0) to bottom (-91)
 I, err=quad(volume_cylinder, z_top, z_bottom)
 
+# Centre of buoyancy (from bottom of platform)
 cb_final=I/volume_cylinder(z_top-z_bottom)
 
 print(f"cb from bottom of platform={cb_final}m")
 
-#metacentric height
+# Metacentric height
 
 metacentric_height= cb_final-cg_final
 
 print (f"metacentric height={metacentric_height}m")
 
-# finding restoring moment of pitching movement
-
+# Restoring hydrostatic moment (pitch restoring stiffness)
 displaced_volume =np.pi*(radius**2)*(z_top-z_bottom)
 seawater_density=1025 #kg/m3
 g=9.81 #m/s2
@@ -98,7 +110,9 @@ print(f"restoring moment (K)={Restoring_moment}")
 
 import math
 
-# 1. Platform Moment of Inertia
+# Moment of Inertia
+
+# Platform Moment of Inertia
 def calculate_platform_inertia(mass_platform, radius_platform, height_platform=None):
     """
     Calculate the platform's rotational inertia about its central (pitch/roll) axis.
@@ -113,7 +127,7 @@ def calculate_platform_inertia(mass_platform, radius_platform, height_platform=N
 
 
 
-# 2. Rotor Moment of Inertia
+# Rotor Moment of Inertia
 def calculate_rotor_inertia(rotor_mass, rotor_radius):
     """
     Calculate the rotor's moment of inertia assuming a solid disk (blades + hub).
@@ -124,7 +138,7 @@ def calculate_rotor_inertia(rotor_mass, rotor_radius):
     return I_rotor
 
 
-# 3. Added (Hydrodynamic) Inertia
+# Added (Hydrodynamic) Inertia
 def calculate_added_inertia(added_mass, reference_radius):
     """
     Calculate the added (hydrodynamic) moment of inertia.
@@ -135,7 +149,8 @@ def calculate_added_inertia(added_mass, reference_radius):
     return I_added
 
 
-# 4. Total Moment of Inertia
+# Total Moment of Inertia
+
 def total_inertia(I_platform, I_rotor, I_added):
     """
     Sum the components.
@@ -143,9 +158,7 @@ def total_inertia(I_platform, I_rotor, I_added):
     return I_platform + I_rotor + I_added
 
 
-# Example Usage
 if __name__ == "__main__":
-    # Example parameters (replace with real design data)
     mass_platform = 8.0e6       # kg
     radius_platform = 6.5       # m
     mass_rotor = 1.1e5          # kg
@@ -158,7 +171,6 @@ if __name__ == "__main__":
     I_rotor = calculate_rotor_inertia(mass_rotor, radius_rotor)
     I_added = calculate_added_inertia(added_mass, added_radius)
 
-    # Total
     I_total = total_inertia(I_platform, I_rotor, I_added)
 
     # Print results
@@ -169,13 +181,14 @@ if __name__ == "__main__":
     print("----------------------------------------------")
     print(f"Total Inertia:    {I_total:,.2e} kg·m²\n")
 
+# Hydrodynamic Damping Table vs Damping Ratio
 import math 
 import pandas as pd
 
 Restoring_hydrostatic_moment=np.array([2.73897174e+09,2.73539926e+09,2.73182780e+09,2.72825738e+09,2.72468799e+09,2.72111962e+09,2.71755228e+09,2.71398598e+09])
 hydrodynamic_damping_list=[]
 
-delta=np.arange(0,1,0.2)
+delta=np.arange(0,1,0.2) 
 
 for d in np.arange(0,1,0.2):
     Ch_per_Kh=[] #damping list for every restoring hydrostatic moment
@@ -195,4 +208,5 @@ df.insert(0, "Damping Ratio", delta)
 
 # Print nicely
 print(df.to_markdown(index=False, floatfmt=".2e"))
+
 
