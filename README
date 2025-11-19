@@ -10,8 +10,13 @@ This file explains how our code files work, what they compute, and how they inte
     - Stability.py: This contains the ODE definition of our system for the main stability code to call to. 
 
 - Power:
-
-
+- Main_Power_Analysis.py: This single script contains all the components to generate the turbine power curve, apply aerodynamic and pitch-angle corrections, compute the Annual Energy Production (AEP), and produce all wanted plots, in 6 sections:
+    - Wind distribution: Defines the Weibull wind-speed model and calculates the number of annual hours at each wind speed.
+    - Spline interpolation model: Performs a non-linear spline interpolation of the NREL 5MW power curve data, producing a smooth function for P(v)
+    - Aerodynamic Cp model: Applys the aerodynamic Cp formula and uses the effect on gearbox and ghenerator efficiency.
+    - Power-Curve generation: Combines the spline interpolation and corrections to generate complete power curves.
+    - Annual-Energy Production: Numerically integrates the power curve with the Weibull wind distribution to compute the annual energy output in MWh/yr.
+    - Main analysis and plotting: Outputs the AEP table and plots for all sections. 
 
 # How to run the code
 You will only need to run two files: 'Main - Code.py' and 'Power.py'.
@@ -27,7 +32,7 @@ You will only need to run two files: 'Main - Code.py' and 'Power.py'.
 4. This will also output Figure 1 - the plot of Stability vs Blade Length which highlights the max blade length to keep the pitch motion within 10 degrees.
    
 ## Power Code
-1. Run the 'main.py' file first to display all plots and print to console the AEP table for multiple blade lengths.
+1. Run the 'main.py' file to display all plots and print to console the AEP table for multiple blade lengths.
 
 2. This will display the plots: Figure 2, Figure 5 and Figure 6  and print the AEP table for multiple blade lengths.
 
