@@ -19,7 +19,7 @@ This file explains how our code files work, what they compute, and how they inte
     - Main analysis and plotting: Outputs the AEP table and plots for all sections. 
 
 # How to run the code
-You will only need to run two files: 'Main - Code.py' and 'Main_Power_Analysis.py'.
+You will only need to run two files: 'Main Stability - Code.py' and 'Main_Power_Analysis.py'.
 
 ## Stability Code
 1. Ensure that all the files listed above in File Structure are downloaded inside the same directory as they relate to each other.
@@ -29,7 +29,7 @@ You will only need to run two files: 'Main - Code.py' and 'Main_Power_Analysis.p
 
 3. The console will output the iteration logs (e.g. "Root Finder Guess: L=...") and it's corresponding ODE solution.
 
-4. This will also output Figure 1 - the plot of Stability vs Blade Length which highlights the max blade length to keep the pitch motion within 10 degrees.
+4. This will also output Figure 8 - the plot of Stability vs Blade Length which highlights the max blade length to keep the pitch motion within 10 degrees.
    
 ## Power Code
 1. Run the 'main.py' file to display all plots and print to console the AEP table for multiple blade lengths.
