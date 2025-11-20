@@ -32,7 +32,7 @@ You will only need to run two files: 'Main Stability - Code.py' and 'Main_Power_
 4. This will also output Figure 8 - the plot of Stability vs Blade Length which highlights the max blade length to keep the pitch motion within 10 degrees.
    
 ## Power Code
-1. Run the 'main.py' file to display all plots and print to console the AEP table for multiple blade lengths.
+1. Run the 'Main_Power_Analysis.py' file to display all plots and print to console the AEP table for multiple blade lengths.
 
 2. This will display the plots: Figure 2, Figure 5 and Figure 6  and print the AEP table for multiple blade lengths.
 
