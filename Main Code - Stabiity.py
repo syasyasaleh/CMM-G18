@@ -72,7 +72,7 @@ def create_wind_gust_profile(t_span, v_mean=12.0, gust_strength=1.5):
         1.1, 1.0, 1.1, 1.2, 1.0, 1.0] # 150 to 200s
        
     
-    # Create a step-function to lop through each mulitplier 'm'
+    # Create a step-function to loop through each mulitplier 'm'
     v_wind_values = [m * v_mean for m in multipliers]
     v_wind = np.repeat(v_wind_values, 2)
     
@@ -82,7 +82,7 @@ def create_wind_gust_profile(t_span, v_mean=12.0, gust_strength=1.5):
     v_wind = v_wind[:len(t_wind)]
 
     """Here we are creating an instant step in wind.
-    When the ODE solver asks 'np.intero. for the wind at t=5s,
+    When the ODE solver asks 'np.intero' for the wind at t=5s,
     it interpolates between (0,12) and (9.99,12) Or if it asks at t=15,
     it interpolates between (10,13.2) and (19.99,13.2).
     We also make sure that the two lists of wind speed and time are the same length.
