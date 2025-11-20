@@ -42,8 +42,8 @@ You will only need to run two files: 'Main - Code.py' and 'Power.py'.
   The ODE itself is defined inside 'Stability.py'.
 
 - Regression / Interpolation
-  - Interpolation: Power................
-
+  - Interpolation: Power: We use non - linear spline interpolation in Main_Power_Analysis.py Lines 28 - 65
+    
 
 
   - Interpolation 2 (minor): We use a minor interpolation in 'Hydrodynamics.py' (Lines 42-57)
